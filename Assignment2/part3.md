@@ -14,7 +14,7 @@ This attack is possible because CBC mode can be modified to have predictable cha
 To prevent this, you would need to ensure an attacker doesn not know the structure of the plaintext or the padding that you use so they cannot modify the ciphertext to create a valid plaintext. Online, it also says you can use authenticated encryption like MAC or HMAC to ensure integrity. 
 
 
-1. For task 3, how do the results compare? Make sure to include the plots in your 
+3. For task 3, how do the results compare? Make sure to include the plots in your 
 report.
 
-The results show that AES scales efficiently with data size, as throughput increases rapidly with larger block sizes and then plateaus, with AES-128 consistently outperforming AES-192 and AES-256 by a modest margin due to fewer rounds. In contrast, RSA performance degrades sharply as key size increases, because RSA relies on expensive exponentiation rather than bulk data processing. Overall, the comparison highlights why AES is used for high-throughput data encryption, while RSA is reserved for small, infrequent operations like key exchange.
+The results show that AES scales with data size, as throughput increases rapidly with larger block sizes, with AES-128 consistently outperforming AES-192 and AES-256 by a small margin. In comparison, RSA’s performance decreases as key size increases. Overall, this highlights why AES is used for high-throughput data encryption, while RSA is for small operations like key exchange.

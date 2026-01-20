@@ -31,11 +31,11 @@ def verify(ciphered):
     return b';admin=true;' in decrypted
 
 def attack():
+    user = b'A' * 16 + b':admin<false:'
+    ct = submit(user)
+
     prefix = b'userid=456;userdata='
     block_size = 16
-
-    user = b'A' * 16 + b':admin<true:'
-    ct = submit(user)
 
     start = len(prefix) + 16
     modified = bytearray(ct)

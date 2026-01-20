@@ -1,7 +1,7 @@
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 
-with open('Assignment2/cp-logo.bmp', 'rb') as f:
+with open('CSC321/Assignment2/cp-logo.bmp', 'rb') as f:
     data = f.read()
 
 # header = first 54 bytes
@@ -44,10 +44,10 @@ iv = get_random_bytes(16)
 ecb_encrypted = encrypt_ecb(padded_rest, key)
 cbc_encrypted = encrypt_cbc(padded_rest, key, iv)
 
-with open('Assignment2/ecb_encrypted.bmp', 'wb') as f:
+with open('CSC321/Assignment2/ecb_encrypted.bmp', 'wb') as f:
   f.write(header + ecb_encrypted)
     
-with open('Assignment2/cbc_encrypted.bmp', 'wb') as f:
+with open('CSC321/Assignment2/cbc_encrypted.bmp', 'wb') as f:
   f.write(header + cbc_encrypted)
   
   
