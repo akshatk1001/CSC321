@@ -10,16 +10,15 @@ def sha256_key(s):
 def sha_256_modified(s):
     digest = sha256(str(s).encode()).digest()
     value = int.from_bytes(digest, "big")
-    print(value)
-    sh = value >> (256 - 30)
-    print(sh)
+    sh = value >> (256 - 15)
+    return sh
 
 def part1_1():
     s = input("Enter the string you would like to encrypt: ")
     res = sha256_key(s)
     print(f"SHA-256 hash of '{s}': {res.hex()}")
 
-def part2_2():
+def part1_2():
     string1 = "hello"
     string2 = "iello"
 
@@ -30,7 +29,24 @@ def part2_2():
     print(f"SHA-256 hash of '{string2}': {hash2.hex()}")
     print()
 
-# def part3_3():
+def part1_3_target_collision(message1):
+    hash1 = sha_256_modified(message1)
+    
+    # print(f"Truncated SHA-256 hash of '{message1}': {hash1}")
 
+    while True:
+        message2 = random.getrandbits(64)
+        
+        if str(message1) == str(message2):
+            print("Strings are the same here")
+            continue
+        
+        hash2 = sha_256_modified(message2)
 
-sha_256_modified("mynameakshat")
+        if hash1 == hash2:
+            print(f"Collision found with character {hash2}")
+            return
+        
+        else:
+            continue
+    
