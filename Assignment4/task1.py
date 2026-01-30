@@ -56,7 +56,7 @@ def part1_3_target_collision(message1, bitstoremove):
 
 def create_graphs(message):
     times = []
-    bit_lengths = [i for i in range(2, 28)]
+    bit_lengths = [i for i in range(2, 29)]
 
     for bit in bit_lengths:
         start = time.time()
