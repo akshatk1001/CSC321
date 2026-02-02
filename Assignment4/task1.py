@@ -88,4 +88,7 @@ def create_graphs(message):
 
     return
 
-create_graphs("example")
+part1_1()
+part1_2()
+print(part1_3_target_collision("computer", 20))
+# create_graphs("example")
