@@ -36,8 +36,10 @@ def part1_3_target_collision(message1, bitstoremove):
     
     # print(f"Truncated SHA-256 hash of '{message1}': {hash1}")
 
+    num_inputs = 0
     while True:
         message2 = random.getrandbits(64)
+        num_inputs += 1
         
         if str(message1) == str(message2):
             print("Strings are the same here")
@@ -46,8 +48,8 @@ def part1_3_target_collision(message1, bitstoremove):
         hash2 = sha_256_modified(message2, bitstoremove)
 
         if hash1 == hash2:
-            print(f"Collision found with character {hash2}")
-            return
+            # print(f"Collision found with character {hash2}")
+            return num_inputs
         
         else:
             continue
@@ -56,21 +58,32 @@ def part1_3_target_collision(message1, bitstoremove):
 
 def create_graphs(message):
     times = []
+    num_inputs_list = []
     bit_lengths = [i for i in range(2, 29)]
 
     for bit in bit_lengths:
         start = time.time()
-        calc = part1_3_target_collision(message, bit)
+        num_inputs = part1_3_target_collision(message, bit)
         end = time.time()
         total = end - start
         times.append(total)
-        print(f"Time taken for {bit} bits: {total} seconds")
+        print(f"Time taken for {bit} bits: {total} seconds, {num_inputs} inputs")
+        num_inputs_list.append(num_inputs)
     
-    plt.figure()
+    plt.figure(figsize=(10, 5))
+    plt.subplot(1, 2, 1)
     plt.plot(bit_lengths, times)
     plt.xlabel("Digest size (bits)")
     plt.ylabel("Collision time (seconds)")
     plt.title("Digest size vs Collision time")
+    
+    plt.subplot(1, 2, 2)
+    plt.plot(bit_lengths, num_inputs_list, color='orange')
+    plt.xlabel("Digest size (bits)")
+    plt.ylabel("Number of inputs")
+    plt.title("Digest size vs Number of inputs")
+    
+    plt.tight_layout()
     plt.show()
 
     return
