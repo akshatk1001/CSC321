@@ -9,6 +9,11 @@ for x in range(lemur.width):
     for y in range(lemur.height):
         lemur_pixel = lemur.getpixel((x, y))
         flag_pixel = flag.getpixel((x, y))
-        result.putpixel((x, y), tuple(a ^ b for a, b in zip(lemur_pixel, flag_pixel)))
+        xored_pixel = []
+
+        for a, b in zip(lemur_pixel, flag_pixel):
+            xored_pixel.append(a ^ b)
+
+        result.putpixel((x, y), tuple(xored_pixel))
 
 result.save("General/XOR/lemur-xor.png")

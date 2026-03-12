@@ -1,4 +1,4 @@
 import pwn
-begin = "label"
+begin = b"label"
 xored = pwn.xor(begin, 13)
-print(str(xored))
+print(xored.decode())

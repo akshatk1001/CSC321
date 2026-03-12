@@ -37,6 +37,9 @@ while True:
         decoded = long_to_bytes(int(enc, 16)).decode()
 
     elif typ == "utf-8":
-        decoded = "".join(chr(c) for c in enc)
+        decoded = ""
+
+        for c in enc:
+            decoded += chr(c)
 
     json_send({"decoded": decoded})

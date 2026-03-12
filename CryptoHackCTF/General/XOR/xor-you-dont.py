@@ -3,11 +3,17 @@ ciphertext = bytes.fromhex(
 )
 
 known_prefix = b"crypto{"
-partial_key = bytes(c ^ p for c, p in zip(ciphertext, known_prefix))
+partial_key = b""
+
+for c, p in zip(ciphertext, known_prefix):
+    partial_key += bytes([c ^ p])
 
 # XORing the known prefix reveals b"myXORke", so the full repeated key is b"myXORkey".
 key = b"myXORkey"
-plaintext = bytes(c ^ key[i % len(key)] for i, c in enumerate(ciphertext))
+plaintext = b""
+
+for i, c in enumerate(ciphertext):
+    key_byte = key[i % len(key)]
+    plaintext += bytes([c ^ key_byte])
 
 print(plaintext.decode())
-
